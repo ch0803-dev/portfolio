@@ -1,59 +1,160 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Mini CRUD</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="wrap">
-    <h1>Produits</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Portfolio Chaimaa Farhane</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="headar">
+      <div class="logo-block">
+        <span class="logo-text">Chaimaa Farhane</span>
+      </div>
+      <nav class="lien">
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#projects">PROJECTS</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </header>
 
-    <form id="product-form">
-      <input type="hidden" id="id">
-      <div class="row">
-        <label for="name">Nom</label>
-        <input id="name" type="text" required>
-      </div>
-      <div class="row">
-        <label for="price">Prix (DH)</label>
-        <input id="price" type="number" step="0.01" min="0" required>
-      </div>
-      <div class="row">
-        <label for="qty">Quantité</label>
-        <input id="qty" type="number" min="0" required>
-      </div>
-      <div class="actions">
-        <button type="submit" id="save-btn">Ajouter</button>
-        <button type="button" id="reset-btn">Annuler</button>
-      </div>
-    </form>
+    <main>
+      <section class="p1" id="home">
+        <div class="p4">
+          <span class="title">
+           Bachelor’s Degree in Software Development
+          </span>
+          <h1 class="hero-name">Chaimaa Farhane</h1>
+          <p>
+           I am pursuing a bachelor's degree in software development. I enjoy creating simple, clean, and easy-to-use interfaces.
+          </p>
+          <div class="p6">
+            <a
+              href="chaimaa farhane 2005 4.pdf"
+              class="btn"
+              id="cv-btn"
+              download
+            >
+              Download my CV
+            </a>
+            <button class="btn bt-alt" id="contact-btn">
+              Contact me
+            </button>
+          </div>
+        </div>
+        <div class="p1-image-container">
+          <div class="hero-image-ring">
+            <img src="ww.jpeg" alt="Photo de Chaimaa Farhane" />
+          </div>
+        </div>
+      </section>
 
-    <div class="tools">
-      <input id="search" type="text" placeholder="Recherche">
-      <button id="clear-all">Tout supprimer</button>
-    </div>
+      <section class="wrap animate-on-scroll" id="about">
+        <h2>About me</h2>
+        <p>
+         My name is Chaimaa Farhane, I live in Casablanca, and I am passionate about web development and digital media. I enjoy organizing a page, structuring content, and maintaining a clear style.
 
-    <table>
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prix</th>
-          <th>Quantité</th>
-          <th>Total</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3" class="right">Total général</td>
-          <td id="grand-total">0</td>
-          <td></td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
-  <script src="app.js"></script>
-</body>
+        </p>
+        <p>
+      With a bachelor’s degree in software development currently in progress, I am building a front-end–oriented profile that is simple, clean, and ready to grow.
+        </p>
+      </section>
+
+      <section class="wrap animate-on-scroll" id="skills">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <div class="product-card">
+            <div class="thumb thumb1"></div>
+            <h3>Web Development</h3>
+            <p>HTML, CSS, and basic JavaScript to create clean pages.
+</p>
+          </div>
+          <div class="product-card">
+            <div class="thumb thumb2"></div>
+            <h3>Simple design</h3>
+            <p></p>
+          </div>
+          <div class="product-card">
+            <div class="thumb thumb3"></div>
+            <h3>Continuous learning</h3>
+            <p>
+            Progress in front-end development, Git, project structuring, and best practices.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap animate-on-scroll" id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <a href="#" class="project-card">
+            <div class="project-image-wrapper">
+              <img src="Screenshot 2025-11-22 142251.png" alt="Portfolio personnel" />
+            </div>
+            <div class="project-content">
+              <h3>Personal portfolio</h3>
+              <p>
+Website in HTML/CSS with a clear structure, pastel colors, and some JS interactions for a smooth experience.
+              </p>
+            </div>
+          </a>
+
+          <a href="#" class="project-card">
+            <div class="project-image-wrapper">
+              <img src="Screenshot 2025-11-22 151244.png" alt="Superette mini e-commerce" />
+            </div>
+            <div class="project-content">
+              <h3>mini-market</h3>
+              <p>
+                Mockup of a mini e-commerce site to showcase products, organize sections, and simulate a real store.  </p>
+            </div>
+          </a>
+
+          <a href="#" class="project-card">
+            <div class="project-image-wrapper">
+              <img src="Capture d'écran 2025-03-21 132918.png" alt="Gestion des assurés" />
+            </div>
+            <div class="project-content">
+              <h3>insured management</h3>
+              <p>
+                Simple interface to list, add, and edit policyholders, focusing on front-end logic and structure.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="wrap animate-on-scroll" id="contact">
+        <h2>Contact</h2>
+        <p> You can contact me here
+</p>
+        <form class="contact-form">
+          <div class="row">
+            <label for="nom"> Last Name</label>
+            <input id="nom" type="text" required />
+          </div>
+          <div class="row">
+            <label for="email">Email</label>
+            <input id="email" type="email" required />
+          </div>
+          <div class="row">
+            <label for="message">Message</label>
+            <textarea id="message" rows="4" required></textarea>
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn" id="send-btn">
+              Send
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Chaimaa Farhane </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
 </html>

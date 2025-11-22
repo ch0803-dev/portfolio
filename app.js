@@ -1,121 +1,62 @@
-const LS_KEY = "mini_crud_items"
-
-function load() {
-  const raw = localStorage.getItem(LS_KEY)
-  return raw ? JSON.parse(raw) : []
+const yearSpan = document.getElementById("year");
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
 }
 
-function save(items) {
-  localStorage.setItem(LS_KEY, JSON.stringify(items))
+const contactBtn = document.getElementById("contact-btn");
+const contactSection = document.getElementById("contact");
+if (contactBtn && contactSection) {
+  contactBtn.addEventListener("click", function () {
+    contactSection.scrollIntoView({ behavior: "smooth" });
+  });
 }
 
-function currency(v) {
-  return Number(v).toFixed(2)
-}
-
-function uid() {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7)
-}
-
-function render(rows) {
-  const tbody = document.getElementById("tbody")
-  tbody.innerHTML = ""
-  let grand = 0
-  rows.forEach(r => {
-    const tr = document.createElement("tr")
-    const total = Number(r.price) * Number(r.qty)
-    grand += total
-    tr.innerHTML = `
-      <td>${r.name}</td>
-      <td>${currency(r.price)}</td>
-      <td>${r.qty}</td>
-      <td>${currency(total)}</td>
-      <td>
-        <button class="action-btn" data-action="edit" data-id="${r.id}">Modifier</button>
-        <button class="action-btn alt" data-action="delete" data-id="${r.id}">Supprimer</button>
-      </td>
-    `
-    tbody.appendChild(tr)
-  })
-  document.getElementById("grand-total").textContent = currency(grand)
-}
-
-function resetForm() {
-  document.getElementById("id").value = ""
-  document.getElementById("name").value = ""
-  document.getElementById("price").value = ""
-  document.getElementById("qty").value = ""
-  document.getElementById("save-btn").textContent = "Ajouter"
-}
-
-function currentFiltered(items) {
-  const q = document.getElementById("search").value.trim().toLowerCase()
-  if (!q) return items
-  return items.filter(r =>
-    r.name.toLowerCase().includes(q)
-    || String(r.price).includes(q)
-    || String(r.qty).includes(q)
-  )
-}
-
-function init() {
-  let items = load()
-  render(currentFiltered(items))
-
-  document.getElementById("product-form").addEventListener("submit", e => {
-    e.preventDefault()
-    const id = document.getElementById("id").value
-    const name = document.getElementById("name").value.trim()
-    const price = document.getElementById("price").value
-    const qty = document.getElementById("qty").value
-    if (!name) return
-    if (id) {
-      items = items.map(it => it.id === id ? { ...it, name, price: Number(price), qty: Number(qty) } : it)
-    } else {
-      items.push({ id: uid(), name, price: Number(price), qty: Number(qty) })
+document.querySelectorAll('.lien a[href^="#"]').forEach(function (link) {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const targetId = link.getAttribute("href").substring(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
     }
-    save(items)
-    render(currentFiltered(items))
-    resetForm()
-  })
+  });
+});
 
-  document.getElementById("reset-btn").addEventListener("click", () => {
-    resetForm()
-  })
-
-  document.getElementById("tbody").addEventListener("click", e => {
-    const btn = e.target.closest("button")
-    if (!btn) return
-    const id = btn.getAttribute("data-id")
-    const action = btn.getAttribute("data-action")
-    if (action === "edit") {
-      const it = items.find(x => x.id === id)
-      if (!it) return
-      document.getElementById("id").value = it.id
-      document.getElementById("name").value = it.name
-      document.getElementById("price").value = it.price
-      document.getElementById("qty").value = it.qty
-      document.getElementById("save-btn").textContent = "Mettre à jour"
-      window.scrollTo(0, 0)
-    }
-    if (action === "delete") {
-      items = items.filter(x => x.id !== id)
-      save(items)
-      render(currentFiltered(items))
-    }
-  })
-
-  document.getElementById("search").addEventListener("input", () => {
-    render(currentFiltered(items))
-  })
-
-  document.getElementById("clear-all").addEventListener("click", () => {
-    items = []
-    save(items)
-    render(items)
-    resetForm()
-    document.getElementById("search").value = ""
-  })
+const contactForm = document.querySelector(".contact-form");
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const nomInput = document.getElementById("nom");
+    const nom = nomInput ? nomInput.value.trim() : "";
+    alert(
+      "Merci " +
+        (nom || "pour ton message") +
+        " ! Ton message est enregistré. Tu pourras connecter ce formulaire plus tard à un vrai back-end."
+    );
+    contactForm.reset();
+  });
 }
 
-document.addEventListener("DOMContentLoaded", init)
+const animatedBlocks = document.querySelectorAll(".animate-on-scroll");
+if ("IntersectionObserver" in window && animatedBlocks.length > 0) {
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    }
+  );
+  animatedBlocks.forEach(function (block) {
+    observer.observe(block);
+  });
+} else {
+  animatedBlocks.forEach(function (block) {
+    block.classList.add("in-view");
+  });
+}
